@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<project name="playIt" default="all" basedir=".">
+  
+  <property name="proj.name" value="playIt"/>
+  <property name="source.dir" location="src"/>
+  <property name="build.dir" location="bin"/>
+  <property name="doc.dir" location="doc"/>
+  <property name="dist.dir" value="dist"/>
+  <property name="lib.dir" value="lib"/>
+  <property name="reports.tests" value="relatorioDeTestes"/>
+  <property name="main.class" value="sistema.main"/>
+  
+  <!-- target limpa - limpa os diretorios criados no workspace-->
+  <target name="limpa" description="limpa o workspace">
+    <echo> Cleaning the project... </echo>
+    <delete dir="${build.dir}"/>
+    <delete dir="${doc.dir}"/>
+    <delete dir="${dist.dir}"/>
+  	<delete dir="${reports.tests}"/>
+    <delete>
+      <fileset defaultexcludes="no" dir="${source.dir}" includes="**/*~"/>
+    </delete>
+   <echo> Project cleaned. </echo>
+  </target>
+	
+  <!-- target init - cria os diretorios para compilacao e distribuicaoc -->
+  <target name="init" description="prepara os diretorios de compilacao">
+    <echo> Creating folders bin, dist and doc... </echo>
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${doc.dir}"/>
+    <mkdir dir="${dist.dir}"/>
+    <echo> Folders created. </echo>
+  </target>
+	
+  <!-- target compila -gera os .class e os coloca no diretorio (bin)-->
+  <target name="compila" depends="init" description="compila o codigo java">
+    <echo> Compiling the project... </echo>
+  	<path id="lib">
+  		<fileset dir="${lib.dir}" includes="*.jar"/>
+  		<fileset dir="WebContent/WEB-INF/lib" includes="*.jar"/>
+  	</path>	
+    <javac srcdir="${source.dir}" destdir="${build.dir}" 
+        includeantruntime="false" classpathref="lib"/>
+    <echo> Project compiled. </echo>
+  </target>
+	
+  <!-- target doc - gera o javadoc do projeto no diretorio ${doc.dir} -->
+  <target name="doc" depends="init" description="gera documentacao">
+    <echo> Generating the javadoc </echo>
+    <javadoc sourcepath="${source.dir}" destdir="${doc.dir}"/>
+    <echo> Javadoc generated. </echo>
+  </target>
+	
+  <!-- target dist - gera o jar do projeto no diretorio ${build.dir}" -->
+  <target name="dist" depends="compila">
+    <echo> Generating dist (.jar package)  ...</echo>    
+    <jar jarfile="${dist.dir}/playIt.jar" basedir="${build.dir}">
+<!-- Tornando o jar executavel-->
+    <manifest>
+     <attribute name="Main-Class" value="${main.class}"/>
+     </manifest>
+     </jar>
+   <echo> Dist generated with success. </echo>
+  </target>  
+	<!-- target run - Executes the current project -->
+  <target name="run" description="run the project" depends="compila">
+   <echo> Running the project... </echo>
+    <java dir="${build.dir}" classname="${main.class}" fork="yes">
+        <arg line="${args}"/>
+    </java>
+   <echo> Project executed with success. </echo>
+  </target>
+	
+	<!-- target testa - Testa o projeto -->
+	<target name="testa" depends="compila" >
+	 <mkdir dir="${reports.tests}"/>
+	    <junit printsummary="yes" haltonfailure="no">
+	    	<formatter type="xml"/>
+	      <classpath>
+	      	<fileset dir="${lib.dir}" includes="*.jar" />
+	        <pathelement location="${build.dir}"/>
+	      	<pathelement location="${source.dir}"/>
+	      </classpath>
+	      <batchtest fork="yes" todir="${reports.tests}">
+	      	<fileset dir="${build.dir}" includes="**/*Test*.class"/>
+	      </batchtest>
+	    </junit>
+  </target>
+	<!-- target war - gera o war do projeto no diretorio ${dist.dir}-->
+	<target name="war">
+	   <war destfile="${dist.dir}/${proj.name}.war" >
+	   <fileset dir="WebContent">
+	      <include name="**/*.*"/>
+	   </fileset>
+	   <lib dir="WebContent/WEB-INF/lib">
+	      <exclude name="playIt.jar"/>
+	   </lib>
+	   <classes dir="${build.dir}"/>
+	</war>
+	</target>
+	
+  <!-- target all - Starts the ant build file execution -->
+  <target name="all" depends="limpa, dist, war">
+   <echo> Executing app... </echo>
+   <java jar="${dist.dir}/playIt.jar" fork="true"/>
+   <echo> App executed. </echo>
+  </target>
+</project>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title><ui:insert name="title">PlayIt</ui:insert></title>
+
+</h:head>
+
+<body bgcolor="000000" background="imagens/logoutpage.jpg" text="#FFFFFF">
+	
+	<h:form>
+		<h:panelGrid columns="1" cellpadding="2" cellspacing="0" style="position: absolute; top: 430px; left: 550px; width:330px">			
+		
+		<p:commandButton ajax="false" action="#{Usuario.voltar}" value="Voltar" style=" border-width:1px; border-color: #FFD700; border-style: solid; text-align: center;background: #FFEE00;color: #303030;width: 100%;"/>
+		<br/>
+				
+		</h:panelGrid>
+	
+	</h:form>
+
+</body>
+</html>

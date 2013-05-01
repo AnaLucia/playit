@@ -1,0 +1,100 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">  
+
+<h:head>
+	<title><ui:insert name="title">play it</ui:insert></title>
+
+</h:head>
+
+<body bgcolor="#FAFAFA" background="imagens/backgroundwhite.JPG" style="background-repeat:repeat-x" text="#303030">
+	<h:graphicImage value="imagens/playit_logo_mini.png" style="position: absolute; top: 10px; left:100px"/>
+	<h:graphicImage value="imagens/defaultavatar.JPG" style="position: absolute; top: 90px; left:100px"/>
+	
+	<h:form id="form2">
+	<h:outputText value="#{Usuario.login}" style="position: absolute; top: 100px; left: 230px; font-size:30;;font-family: Trebuchet, Helvetica, Arial;"/>
+	<h:outputText value="#{Usuario.nome}" style="position: absolute; top: 140px; left: 230px; font-size:18;;font-family: Trebuchet, Helvetica, Arial;"/>
+
+	<p:inputText id="search" title="login" value="#{Usuario.seguir}" style="position: absolute; top: 100px; right: 230px; height:35px; width:230px"/>
+	<p:commandButton ajax="false" value="seguir" action="#{Usuario.seguirUsuario}" style="position: absolute; top: 100px; right: 100px;height:35px; width:120px"/>
+	<p:watermark for="search" value="login do amigo" />/
+
+	
+	<p:inputText id="insertMessage" value="#{Usuario.link}" style="position: absolute; top: 200px; left: 100px; height:60px; width:345px"/>
+	<p:watermark for="insertMessage" value="insira seu link aqui" />				
+	<p:commandButton ajax="false" value="enviar" action="#{Usuario.postarSom}" style="position: absolute; top:265px; left:240px;height:35px; width:100px"/>
+	<p:commandButton ajax="false" value="apagar" action="#{Usuario.apagarLink}" style="position: absolute; top:265px; left:345px;height:35px; width:100px"/>      
+	
+	<p:commandButton ajax="false" value="sair" action="#{Usuario.logout}" style="position: absolute; top:25px; right:100px;height:35px; width:100px"/>      
+	
+	<p:panel header="Seguindo (minhas fontes de som)" style="background: #EEEEEE; border-color:#AAAAAA ;position: absolute; top: 170px; right: 100px; width:350px;height:200px">
+		<h:selectManyListbox value="#{Usuario.seguindo}" 
+			id="seguindo" style="width:100%; height:130px; background: #FFFFFF" >
+			<f:selectItems value="#{Usuario.seguindo}"
+				var="usuarioSelecionado"
+				itemValue="#{usuarioSelecionado}" />
+		</h:selectManyListbox>
+
+	</p:panel>
+		<p:panel header="Seguidores" style="background: #EEEEEE; border-color:#AAAAAA; position: absolute; top: 370px; right: 100px; width:350px;height:200px">
+		<p:selectOneListbox value="#{Usuario.seguidores}"
+			id="seguidores" style="width:100%; height:130px">
+			<f:selectItems value="#{Usuario.seguidores}"
+				var="usuarioSelecionado"
+				itemValue="#{usuarioSelecionado}" />
+		</p:selectOneListbox>
+	</p:panel>
+
+	<p:tabView id="tabView" dynamic="true" cache="true" style="background: #333333; border-color:#AAAAAA;position:absolute; top:350; width:600px; left: 100px">
+		<p:tab id="recentes" title="Principal">
+			<h3>Últimos sons postados</h3>
+			<p:dataTable value="#{Usuario.feedPrincipal}" var="mus" rows="10" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}" id="musTable" lazy="true">
+				<p:column headerText="Favoritar" width="160">
+					<h:commandButton value="favoritar"
+						action="#{sessao.favoritarMusica(mus)}" />
+				</p:column>
+			</p:dataTable>
+
+			<p:spacer height="12" />
+		</p:tab>
+	
+		<p:tab id="favoritos" title="Favoritos">
+
+			<h3>Meus Sons Favoritos</h3>
+			<p:dataTable value="#{Usuario.favoritos}" var="fav" rows="10"
+				paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}"
+				id="favsTable" lazy="true">
+			</p:dataTable>
+
+			<p:spacer height="12" />
+		</p:tab>
+
+		<p:tab id="feedExtra" title="Feed Extra">
+			<h3>Sons favoritos de meus amigos</h3>
+			<p:dataTable value="#{Usuario.feedExtra}" var="feed" rows="10"
+				paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}"
+				id="extraFeedTable" lazy="true">
+			</p:dataTable>
+
+			<p:spacer height="12" />
+		</p:tab>
+		
+		<p:tab id="perfilMusical" title="Meus Sons">
+			<h3>Meu perfil musical</h3>
+			<p:dataGrid var="fonte" value="#{Usuario.perfilMusical}" columns="1" rows="10" paginator="true" lazy="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}">
+				<p:column>
+					<p:outputLabel value="#{fonte.nome}" />
+				</p:column>
+			</p:dataGrid>
+			<p:spacer height="12" />
+
+		</p:tab>
+	</p:tabView>
+	
+	</h:form>
+</body>
+ </html>

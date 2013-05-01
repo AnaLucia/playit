@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title><ui:insert name="title">PlayIt</ui:insert></title>
+
+</h:head>
+
+<body bgcolor="000000" background="imagens/playit_background.jpg" text="#FFFFFF">
+	<p align="left" > <img src="imagens/playit_logo.png" hspace="80" vspace="20"/></p>
+	<p align="left" > <img src="imagens/initialtext.png" hspace="80" vspace="40"/></p>
+
+	<p:growl id="msg" showDetail="true" sticky="true" />
+
+	<h:form>
+		<h:panelGrid columns="2" cellpadding="2" style="position: absolute; top: 40px; right: 100px">
+		<p:inputText id="userLogin" title="login" value="#{Usuario.login}" style="height:30px"/>
+		<p:watermark for="userLogin" value="login" />
+		
+		<p:password id="passwordLogin" title="senha" value="#{Usuario.senha}" style="height:30px"/>
+		<p:watermark for="passwordLogin" value="senha"/>		
+		<p:commandButton ajax="false" action="#{Usuario.verificaLogin}" value="Entrar" style="height:35px; width:100px" outcome="timeline.xhtml"/>		
+	</h:panelGrid>
+	
+	</h:form>
+	
+	<h:form>
+		<h:panelGrid columns="1" cellpadding="2" cellspacing="0" style="position: absolute; top: 250px; right: 320px">			
+		
+		<p:effect type="drop" event="click" />  
+		 		
+		<p:inputText id="nomeCadastro" title="Digite seu nome" value="#{Usuario.nome}" style="width:300px"/>
+		<p:watermark for="nomeCadastro" value="Digite seu nome" />
+
+		<p:inputText id="loginCadastro" title="Digite seu login" value="#{Usuario.login}" style="width:300px"/>
+		<p:watermark for="loginCadastro" value="Digite seu login (ex: mark123)" />
+
+		<p:inputText id="emailCadastro" title="Digite seu email" value="#{Usuario.email}" style="width:300px"/>
+		<p:watermark for="emailCadastro" value="Digite seu email" />
+
+		<p:password id="senhaCadastro" title="Digite sua senha" value="#{Usuario.senha}" style="width:300px"/>
+		<p:watermark for="senhaCadastro" value="Digite sua senha"/>
+
+		<p:password id="senha2Cadastro" title="Repita sua senha" value="#{Usuario.confirmarSenha}" style="width:300px"/>
+		<p:watermark for="senha2Cadastro" value="Repita sua senha"/>
+		
+		<p:commandButton ajax="false" action="#{Usuario.criarConta}" value="Inscreva-se Grátis" style=" border-width:1px; border-color: #FFD700; border-style: solid; text-align: center;background: #FFD700;color: #303030;width: 100%;"/>
+		<br/>
+				
+		</h:panelGrid>
+	
+	</h:form>
+
+</body>
+</html>
