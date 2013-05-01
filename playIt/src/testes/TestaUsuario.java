@@ -78,19 +78,19 @@ public class TestaUsuario {
 		Assert.assertEquals("zezinho", user3.getID());
 	}
 	
-	@Test
-	public void TestaPostarSom(){
-		Assert.assertEquals(true, user1.getPerfilmusical().ehVazio());
-		String idSom1 = user1.postarSom("https://www.youtube.com", "09/04/13");
-		Assert.assertEquals(false, user1.getPerfilmusical().ehVazio());
-		Assert.assertEquals("[" + idSom1 +"]", user1.getPerfilmusical().getPerfil().toString());
-		String idSom2 = user1.postarSom("https://www.youtube.com", "09/04/13");
-		Assert.assertEquals("[" + idSom2 + ", "+ idSom1  +"]", user1.getPerfilmusical().getPerfil().toString());
-		
-		//user1.postarSom("");
-		
-		user1.postarSom(null, null);
-		Assert.assertEquals("[" + idSom2 + ", "+ idSom1  +"]", user1.getPerfilmusical().getPerfil().toString());
-	}
+//	@Test
+//	public void TestaPostarSom(){
+//		Assert.assertEquals(true, user1.getPerfilmusical().ehVazio());
+//		String idSom1 = user1.postarSom("https://www.youtube.com", "09/04/13");
+//		Assert.assertEquals(false, user1.getPerfilmusical().ehVazio());
+//		Assert.assertEquals("[" + idSom1 +"]", user1.getPerfilmusical().getPerfil().toString());
+//		String idSom2 = user1.postarSom("https://www.youtube.com", "09/04/13");
+//		Assert.assertEquals("[" + idSom2 + ", "+ idSom1  +"]", user1.getPerfilmusical().getPerfil().toString());
+//		
+//		//user1.postarSom("");
+//		
+//		user1.postarSom(null, null);
+//		Assert.assertEquals("[" + idSom2 + ", "+ idSom1  +"]", user1.getPerfilmusical().getPerfil().toString());
+//	}
 
 }

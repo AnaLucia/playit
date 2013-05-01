@@ -3,16 +3,8 @@ package testes;
 import java.util.List;
 
 
-import classes.Regra1;
-import classes.Regra2;
-import classes.Regra3;
-import classes.RegraDeOrdenacao;
-import classes.Usuario;
-import classes.PerfilMusical;
 import classes.Sistema;
-import classes.Som;
-import excecoes.LoginException;
-import excecoes.SomException;
+
 
 /**
  * Classe que faz a "ponte" entre os scripts dos testes de aceitacao e o sistema da rede social
@@ -33,6 +25,7 @@ public class FachadaTestesAceitacao {
 	public void zerarSistema(){
 		sistema.zerarSistema();
     }
+	
 	
 	public void criarUsuario(String login, String senha, String nome, String email) throws Exception {
 		sistema.criarUsuario(login, senha, nome, email);
@@ -76,6 +69,9 @@ public class FachadaTestesAceitacao {
 		sistema.encerrarSistema();
 	}
 	
+	 public void reiniciarSistema(){ 
+		 sistema = new Sistema();
+		 }
 	
 	//US02
 	

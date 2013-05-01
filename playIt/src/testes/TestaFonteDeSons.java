@@ -65,4 +65,25 @@ public class TestaFonteDeSons {
 		Assert.assertEquals("[flavinha, lipinho]", font1.getFonte().toString());
 	}
 
+	@Test
+	public void testaToString(){
+		font1.addFonte("idUsuario");
+		font1.addFonte("idUsuario1");
+		
+		font2.addFonte("idUsuario2");
+		
+		font3.addFonte("idUsuario3");
+		font3.addFonte("idUsuario4");
+		
+		Assert.assertEquals("[idUsuario idUsuario1]", font1.toString());
+		Assert.assertEquals("[idUsuario2]", font2.toString());
+		Assert.assertEquals("[idUsuario3 idUsuario4]", font3.toString());
+
+		
+		
+
+		
+		
+	}
+	
 }

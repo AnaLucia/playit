@@ -25,7 +25,9 @@ public class TestesAceitacao {
 		files.add("testesDeAceitacao"+ barra + "US04.txt");
 		files.add("testesDeAceitacao"+ barra + "US05.txt");
 		files.add("testesDeAceitacao"+ barra + "US06.txt");
-		//files.add("testesDeAceitacao"+ barra + "US07.txt");
+		files.add("testesDeAceitacao"+ barra + "US07.txt");
+		files.add("testesDeAceitacao"+ barra + "US09.txt");
+
 		
 		
 		

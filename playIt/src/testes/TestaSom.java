@@ -41,4 +41,33 @@ public class TestaSom {
 		
 	}
 	
+	@Test
+	public void testaIdDoSom(){
+		Assert.assertEquals(null, song1.getIdSom());
+		song1.setIdSom("id");
+		Assert.assertEquals("id", song1.getIdSom());
+		
+		Assert.assertEquals(null, song2.getIdSom());
+		song2.setIdSom("id1");
+		Assert.assertEquals("id1", song2.getIdSom());
+
+		
+	}
+	
+	@Test
+	public void testaFavorita(){
+		song1.addFavoritada();
+		song1.addFavoritada();
+		
+		Assert.assertEquals(2, song1.getNumDeFavoritadas());
+		
+		song2.addFavoritada();
+		song2.addFavoritada();
+		song2.addFavoritada();
+		song2.addFavoritada();
+		
+		Assert.assertEquals(4, song2.getNumDeFavoritadas());
+
+		
+	}
 }
